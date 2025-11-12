@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirecting...</title>
+</head>
+<body>
+    <div style="text-align: center; padding: 50px;">
+        <h1>Redirecting to your app...</h1>
+        <p>If not redirected automatically, <a href="#" onclick="performRedirect()">click here</a>.</p>
+    </div>
+    <script>
+        function performRedirect() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const transId = urlParams.get('transId');
+            const pendingId = urlParams.get('pendingId');
+            
+            if (transId && pendingId) {
+                const deepLink = `myapp://fapshi-callback?transId=${transId}&pendingId=${pendingId}`;
+                window.location.href = deepLink;
+            } else {
+                document.body.innerHTML = '<h1 style="color: red;">Error: Missing transId or pendingId</h1>';
+            }
+        }
+        
+        // Auto-redirect on load
+        performRedirect();
+    </script>
+</body>
+</html>
